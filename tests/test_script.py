@@ -1,13 +1,12 @@
+
 from playwright.sync_api import sync_playwright
-from playwright.sync_api import sync_playwright, expect
 import os
 
-def run(playwright):
-    # Launch browser (set headless=False to see browser actions)
-    browser = playwright.chromium.launch(headless=False)
-    context = browser.new_context()
-    page = context.new_page()
-
+def test_example():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        
     # ------------------------------
     # Scenario 1: Login
     # ------------------------------
@@ -15,10 +14,10 @@ def run(playwright):
 
     page.fill("input[name='email']", "qa@ccbst.ca")
     page.fill("input[name='password']", "1112")
-    os.makedirs("reports/screenshots/Ccbst", exist_ok=True)
+    os.makedirs("reports/screenshots", exist_ok=True)
 
         # Take screenshot
-    page.screenshot(path="reports/screenshots/Ccbst/example.png")
+    page.screenshot(path="reports/screenshots/example11.png")
     page.click("button[type='submit']")
     page.goto("https://ccbst.ccbst.org/ccbst/public/index.php/x/student-inquiries")
     #page.wait_for_selector("text=Dashboard")
@@ -52,7 +51,7 @@ def run(playwright):
     page.fill("#postal_code", "A1B2C3")
 
         # Take screenshot
-    page.screenshot(path="reports/screenshots/Ccbst/example1.png")
+    page.screenshot(path="reports/screenshots/example122.png")
     # Select radios
     # -----------------------------
     page.wait_for_selector("input#male", state="visible")
@@ -76,7 +75,7 @@ def run(playwright):
     # -----------------------------
     page.fill("#inquiry_followed_up_at", "2025-10-01")
         # Take screenshot
-    page.screenshot(path="reports/screenshots/Ccbst/example2.png")
+    page.screenshot(path="reports/screenshots/example223.png")
     # -----------------------------
     # Submit form
     # -----------------------------
@@ -87,21 +86,5 @@ def run(playwright):
     # -----------------------------
     # Wait for confirmation message
        # ✅ Validation (fix)
-    try:
-        expect(page.locator("text=Lead created successfully")).to_be_visible(timeout=5000)
-        print("✅ Lead form submitted successfully")
-                # Take screenshot
-        page.screenshot(path="reports/screenshots/Ccbst/example3.png")
-    except:
-        page.screenshot(path="error.png")
-        print("❌ Success message not found. Screenshot saved as error.png")
-
-    # ------------------------------
-    # Cleanup
-    # ------------------------------
-    context.close()
-    #browser.close()
-
-
-with sync_playwright() as playwright:
-    run(playwright)
+    assert "Example Domain" in page.title()
+    browser.close()
