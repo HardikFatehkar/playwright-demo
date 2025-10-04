@@ -19,7 +19,66 @@ def test_example():
 
             # Take screenshot
             page.screenshot(path="reports/screenshots2/example875.png") 
-            print("✅ Login successful")         
+            print("✅ Login successful")
+            # ------------------------------
+            # Scenario 2: Add New Lead
+            # ------------------------------
+            page.click("a[class='pull-right btn btn-sm green']")
+            # page.click("text=Add New Lead")
+
+            # -----------------------------
+            # Fill dropdowns
+            # -----------------------------
+            page.select_option("#inquiry_status_id", "2")   # Working
+            page.select_option("#campus_id", "1")           # Scarborough
+
+            # If "Other" status is chosen
+            # page.select_option("#inquiry_status_id", "10")
+            # page.fill("#other_status", "Special Status")
+
+            # -----------------------------
+            # Fill text fields
+            # -----------------------------
+            page.fill("#first_name", "John")
+            page.fill("#last_name", "Doe")
+            page.fill("#phone_no", "9876543210")
+            page.fill("#email", "john.doe@example.com")
+            page.fill("#address", "123 Test Street")
+            page.fill("#postal_code", "A1B2C3")
+ 
+            # Select radios
+            # -----------------------------
+            page.wait_for_selector("input#male", state="visible")
+            page.check("input#male", force=True)     # Gender
+            page.wait_for_selector("input#in_campus", state="visible")
+            page.check("input#in_campus", force=True)   # Student Access
+            page.wait_for_selector("input#good", state="visible")
+            page.check("input#good", force=True)        # Lead
+
+
+            # -----------------------------
+            # More dropdowns
+            # -----------------------------
+            page.select_option("#program_type", '1')        # Diploma
+            page.select_option("#how_contact_us_id", "1")   # Call
+            page.select_option("#chart_of_activity_id", "131") # Flyer
+            page.select_option("#country_id", "3")          # India
+
+            # -----------------------------
+            # Date fields (must match format YYYY-MM-DD)
+            # -----------------------------
+            page.fill("#inquiry_followed_up_at", "2025-10-01")
+
+            # -----------------------------
+            # Submit form
+            # -----------------------------
+            page.click("button[type='submit']")  # Adjust selector if different
+
+            # -----------------------------
+            # Validation
+            # -----------------------------
+            # Wait for confirmation message
+            # ✅ Validation (fix)         
         except Exception as e:
             os.makedirs("reports/failure", exist_ok=True)
             page.screenshot(path="reports/failure.png")
