@@ -8,10 +8,10 @@ def test_example():
         page.goto("https://example.com")
 
         # Ensure reports/screenshots folder exists
-        os.makedirs("reports/screenshots", exist_ok=True)
+        os.makedirs("reports/screenshots1", exist_ok=True)
 
         # Take screenshot
-        page.screenshot(path="reports/screenshots/example.png")
+        page.screenshot(path="reports/screenshots1/example875.png")
 
         assert "Example Domain" in page.title()
         browser.close()
