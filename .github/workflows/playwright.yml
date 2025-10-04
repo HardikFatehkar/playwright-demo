@@ -21,4 +21,11 @@ jobs:
           playwright install --with-deps
 
       - name: Run tests
-        run: pytest tests/
+        run: pytest tests/ --html=reports/report.html --self-contained-html
+        
+     # Upload reports as workflow artifact
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-report
+          path: reports/    
