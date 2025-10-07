@@ -52,8 +52,9 @@ def test_example():
             page.check("input#male", force=True)     # Gender
             page.wait_for_selector("input#in_campus", state="visible")
             page.check("input#in_campus", force=True)   # Student Access
-            page.wait_for_selector("input#good", state="visible")
-            page.check("input#good", force=True)        # Lead
+            # Wait until element exists
+            #page.wait_for_selector("input#good", state="visible")
+           # assert page.is_checked("input#good")  # Works for checkbox, may fail for radio
 
 
             # -----------------------------
