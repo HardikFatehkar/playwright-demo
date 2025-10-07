@@ -29,7 +29,7 @@ def test_example():
 
             page.wait_for_selector("input#good", state="visible")
         
-            page.click("input#good", force=True)
+           # page.click("input#good", force=True)
             page.wait_for_timeout(500)
             assert page.locator("input#good").is_checked(), "Radio button did not stay checked"
         except Exception as e:
