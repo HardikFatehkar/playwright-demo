@@ -3,7 +3,7 @@ import os
 
 def test_example():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False)
+        browser = p.chromium.launch(headless=True)
         page = browser.new_page()
         try:
             page.goto("https://ccbst.ccbst.org/ccbst/public/index.php/x")
@@ -36,5 +36,5 @@ def test_example():
             page.screenshot(path="reports/failure1.png")
             raise e
         finally:
-           # browser.close()
+            browser.close()
             page.screenshot(path="reports/failure11.png")

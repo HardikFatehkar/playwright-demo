@@ -81,8 +81,9 @@ def test_example():
             # Wait for confirmation message
             # ✅ Validation (fix)         
         except Exception as e:
-            os.makedirs("reports/failure", exist_ok=True)
-            page.screenshot(path="reports/failure.png")
+           # os.makedirs("reports/failure", exist_ok=True)
+            page.screenshot(path="reports/failure/225.png")
             raise e
         finally:
-            browser.close()
+            page.screenshot(path="reports/failure22.png")
+            #browser.close()

@@ -1,0 +1,8 @@
+project: "playwright-demo"
+language: "python"
+version: "3.10"
+framework: "pytest"
+test_path: "tests"
+dependencies:
+  - pytest
+  - playwright
